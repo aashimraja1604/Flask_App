@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/upload">Upload</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="container">
+        <h1>Welcome, {{ user.full_name }}</h1>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Father's Name:</strong> {{ user.father_name }}</p>
+        <p><strong>Class:</strong> {{ user.class }}</p>
+        <p><strong>Section:</strong> {{ user.section }}</p>
+        <p><strong>Roll Number:</strong> {{ user.roll_number }}</p>
+        <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+        <p><strong>Gender:</strong> {{ user.gender }}</p>
+        
+        <h2>Uploaded Files</h2>
+        <ul>
+            {% for file in uploads %}
+            <li>
+                {{ file.filename }} - 
+                <a href="{{ url_for('download_file', filename=file.filename) }}">Download</a> | 
+                <a href="{{ url_for('delete_file', filename=file.filename) }}" style="color: red;">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
